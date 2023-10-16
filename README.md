@@ -64,7 +64,7 @@ router.endpoint(
   async (inputs, ctx) => {
     // Return response as tuple
     return [200, { hello: inputs.params.name }];
-  }
+  },
 );
 ```
 
@@ -93,7 +93,7 @@ router.endpoint(
   async (inputs, ctx) => {
     // await yourAsyncOperation(inputs.body)
     return [201, { id: "123", favoriteColor: null, ...inputs.body }];
-  }
+  },
 );
 ```
 
@@ -104,15 +104,18 @@ router.endpoint(
 const document: string = api.openapi3({ title: "My Api", version: "1.0.0" });
 ```
 
-The generated Document is does not specify reference objects, but does a good job of quickly providing an overview of your api including inputs and responses.
+The generated Document is does not specify reference objects, but does a good
+job of quickly providing an overview of your api including inputs and responses.
 
 ## Error Handling
 
-If input validation (query, path params or body) fails, `400 Invalid Request` is returned.
+If input validation (query, path params or body) fails, `400 Invalid Request` is
+returned.
 
 If response validation fails, `500 Internal Server Error` is returned
 
-By default, details about the failed validation are returned in the response body.
+By default, details about the failed validation are returned in the response
+body.
 
 You may use a custom middleware to control this behaviour, eg:
 
