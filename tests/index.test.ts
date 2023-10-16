@@ -1,5 +1,4 @@
 import {
-  afterAll,
   beforeAll,
   beforeEach,
   describe,
@@ -28,8 +27,8 @@ describe("ZOak Request Tests", () => {
           200: z.string(),
         },
       },
-      async (inputs, ctx) => {
-        return [200, "healthy"];
+      async () => {
+        return await Promise.resolve([200, "healthy"]);
       },
     );
 
@@ -46,8 +45,8 @@ describe("ZOak Request Tests", () => {
           }),
         },
       },
-      async (inputs, ctx) => {
-        return [200, { hello: inputs.params.name }];
+      async (inputs) => {
+        return await Promise.resolve([200, { hello: inputs.params.name }]);
       },
     );
 
@@ -69,8 +68,12 @@ describe("ZOak Request Tests", () => {
           }),
         },
       },
-      async (inputs, ctx) => {
-        return [201, { id: "123", favoriteColor: null, ...inputs.body }];
+      async (inputs) => {
+        return await Promise.resolve([201, {
+          id: "123",
+          favoriteColor: null,
+          ...inputs.body,
+        }]);
       },
     );
 
@@ -89,8 +92,8 @@ describe("ZOak Request Tests", () => {
           })),
         },
       },
-      async (inputs, ctx) => {
-        return [200, [{ name: "John", age: 21 }]];
+      async () => {
+        return await Promise.resolve([200, [{ name: "John", age: 21 }]]);
       },
     );
 
@@ -184,7 +187,7 @@ describe("ZOak Request Tests", () => {
 });
 
 describe("ZOak EndpointRouter Tests", () => {
-  it("throws on already registered endpoint", async () => {
+  it("throws on already registered endpoint", () => {
     const myRouter = new EndpointRouter();
     myRouter.endpoint(
       "/authors",

@@ -1,4 +1,4 @@
-import { oak, z } from "./../deps.ts";
+import { z } from "./../deps.ts";
 import { InputValidationError, ResponseValidationError } from "./Errors.ts";
 
 export type ValidatorResponseSchema = { [StatusCode: number]: z.ZodTypeAny };

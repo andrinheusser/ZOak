@@ -4,7 +4,6 @@ import {
   ValidatorResponseSchema,
 } from "./EndpointValidator.ts";
 import { InputValidationError, ResponseValidationError } from "./Errors.ts";
-import * as oa from "./openapi/openapi30.ts";
 
 export type Endpoint = {
   path: string;

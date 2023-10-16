@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // Typed interfaces for OpenAPI 3.0.3

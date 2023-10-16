@@ -1,6 +1,5 @@
 import {
   beforeAll,
-  beforeEach,
   describe,
   it,
 } from "https://deno.land/std@0.204.0/testing/bdd.ts";
@@ -8,7 +7,7 @@ import { z } from "../../deps.ts";
 import { EndpointRouter, ZOak } from "../../mod.ts";
 import { assert } from "https://deno.land/std@0.200.0/assert/assert.ts";
 import testSchema from "./testSchema.json" assert { type: "json" };
-import { equal } from "https://deno.land/x/equal/mod.ts";
+import { equal } from "https://deno.land/x/equal@v1.5.0/mod.ts";
 
 describe("ZOak", () => {
   let api: ZOak;
@@ -28,8 +27,8 @@ describe("ZOak", () => {
           200: z.string(),
         },
       },
-      async (inputs, ctx) => {
-        return [200, "healthy"];
+      async () => {
+        return await Promise.resolve([200, "healthy"]);
       },
     );
 
@@ -46,8 +45,8 @@ describe("ZOak", () => {
           }),
         },
       },
-      async (inputs, ctx) => {
-        return [200, { hello: inputs.params.name }];
+      async (inputs) => {
+        return await Promise.resolve([200, { hello: inputs.params.name }]);
       },
     );
 
@@ -69,8 +68,8 @@ describe("ZOak", () => {
           }),
         },
       },
-      async (inputs, ctx) => {
-        return [201, { id: "123", ...inputs.body }];
+      async (inputs) => {
+        return await Promise.resolve([201, { id: "123", ...inputs.body }]);
       },
     );
 
@@ -89,8 +88,8 @@ describe("ZOak", () => {
           })),
         },
       },
-      async (inputs, ctx) => {
-        return [200, [{ name: "John", age: 21 }]];
+      async () => {
+        return await Promise.resolve([200, [{ name: "John", age: 21 }]]);
       },
     );
 

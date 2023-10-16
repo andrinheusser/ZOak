@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 export type IExtensionName = `x-${string}`;
 export type IExtensionType = any;
 export type ISpecificationExtension = {
