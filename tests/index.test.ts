@@ -147,6 +147,11 @@ describe("ZOak Request Tests", () => {
       .send({ name: "John", age: 21, favoriteColor: "blue" })
       .expect({ id: "123", name: "John", age: 21, favoriteColor: "blue" });
   });
+  it("validation for body but no body sent", async () => {
+    await request
+      .post("/authors")
+      .expect(400);
+  });
   it("invalid body - age too low", async () => {
     await request
       .post("/authors")
@@ -163,6 +168,11 @@ describe("ZOak Request Tests", () => {
     await request
       .get("/authors/search?name=John&age=21")
       .expect([{ name: "John", age: 21 }]);
+  });
+  it("omit query when query required", async () => {
+    await request
+      .get("/authors/search")
+      .expect(400);
   });
   it("valid query, but includes extra data", async () => {
     await request

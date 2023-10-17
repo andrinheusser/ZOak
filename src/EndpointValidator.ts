@@ -44,13 +44,16 @@ export class EndpointValidator<
   } {
     try {
       return {
-        query: query && Object.keys(query).length > 0
+        query: (query && Object.keys(query).length > 0) || this.schemas.query
           ? this.parse(query, this.schemas.query, "query")
           : undefined,
-        body: body ? this.parse(body, this.schemas.body, "body") : undefined,
-        params: params && Object.keys(params).length > 0
-          ? this.parse(params, this.schemas.params, "params")
+        body: body || this.schemas.body
+          ? this.parse(body, this.schemas.body, "body")
           : undefined,
+        params:
+          (params && Object.keys(params).length > 0) || this.schemas.params
+            ? this.parse(params, this.schemas.params, "params")
+            : undefined,
       };
     } catch (e) {
       if (e instanceof z.ZodError) {
